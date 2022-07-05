@@ -41,7 +41,6 @@ public class Menu {
         array [z] = calculatorResult;
         System.out.println(Arrays.toString(array));
         z ++;
-
     }
 
     private void avoidWaitingMode(){
