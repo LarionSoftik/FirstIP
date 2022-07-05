@@ -1,12 +1,18 @@
 package oop.CalculatorZheni;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Menu {
     private Scanner scanner = new Scanner(System.in);
+    private int z = 0;
+    CalculatorImpl calculator = new CalculatorImpl();
+    private double calculatorResult;
+    private double [] array = new double[5];
 
-    public void menu (){
-        CalculatorImpl calculator = new CalculatorImpl();
+
+    public void menu () {
+
         System.out.println("Введите - +, чтобы сложить числа");
         System.out.println("Введите - -, чтобы вычесть числа");
         System.out.println("Введите - *, чтобы умножить число на число");
@@ -15,15 +21,32 @@ public class Menu {
         System.out.println("Введите - 0, чтобы закрыть программу");
 
 
-        while (true){
+        while (true) {
             double a = enterValue();
             double b = enterValue();
-            String action = enterAction ();
-            double calculatorResult = calculator.action(a, b, action);
+            avoidWaitingMode();
+            String action = enterAction();
+            calculatorResult = calculator.action(a, b, action);
             System.out.println(calculatorResult);
+            memorizingResult();
             break;
-            }
         }
+        repeat();
+    }
+
+    private void memorizingResult (){
+        if (z == 5) {
+            z = 0;
+        }
+        array [z] = calculatorResult;
+        System.out.println(Arrays.toString(array));
+        z ++;
+
+    }
+
+    private void avoidWaitingMode(){
+        scanner.nextLine();
+    }
 
     private double enterValue (){
         double value = 0;
@@ -37,6 +60,7 @@ public class Menu {
     }
 
     private String enterAction(){
+        System.out.println("Введите математическую операцию");
         String operation = null;
         if (scanner.hasNextLine()){
             operation = scanner.nextLine();
